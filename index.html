@@ -11,27 +11,28 @@
     <!-- Full Blockbench Workspace Container -->
     <div class="blockbench-container">
         <header class="bb-header">
-            <!-- Centered Header Title -->
             <div class="bb-title">EchoBegecko's Website</div>
         </header>
 
-        <main class="bb-workspace">
-            <!-- 3D Tilt Wrapper: Stretches screen-wide with 1cm margins and sits 5cm down -->
+        <main class="bb-workspace" id="workspaceContainer">
+            <!-- 3D Tilt Wrapper: Set 7cm down from the top, stretched with 1cm side margins -->
             <div class="tilt-wrapper" id="tiltCard">
-                <!-- Inner profile contents -->
-                <div class="profile-card">
-                    <!-- Fetches 3D skin head via your UUID -->
-                    <img class="avatar" src="https://crafatar.com" alt="Minecraft Head">
-                    <div class="card-info">
-                        <span class="username">EchoBegecko</span>
-                        <span class="status-tag">Online</span>
+                <!-- Inside layer isolates the idle up/down bop safely away from tilt math -->
+                <div class="bop-layer">
+                    <div class="profile-card">
+                        <!-- Uses the Visage render engine to reliably load your 3D head avatar -->
+                        <img class="avatar" src="https://surgeplay.com" alt="Minecraft Head">
+                        <div class="card-info">
+                            <span class="username">EchoBegecko</span>
+                            <span class="status-tag">Online</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Links the 3x tracking logic script -->
+    <!-- Links the tracking logic script -->
     <script src="script.js"></script>
 </body>
 </html>
