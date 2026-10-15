@@ -11,13 +11,13 @@ card.addEventListener('mousemove', (e) => {
     const mouseX = e.clientX - cardCenterX;
     const mouseY = e.clientY - cardCenterY;
     
-    // Map offsets to tilt angles (maximum limit capped at 25 degrees)
-    const maxTilt = 25;
+    // Map offsets to tilt angles (maximum limit capped at 75 degrees - 3x stronger!)
+    const maxTilt = 75;
     const tiltX = (mouseY / (cardRect.height / 2)) * -maxTilt;
     const tiltY = (mouseX / (cardRect.width / 2)) * maxTilt;
     
     // Updates rotational translation in real-time
-    card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.05)`;
+    card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.1)`;
 });
 
 // Snaps back smoothly to center point when your cursor leaves the boundary box
@@ -30,3 +30,4 @@ card.addEventListener('mouseleave', () => {
 card.addEventListener('mouseenter', () => {
     card.style.transition = 'transform 0.1s ease-out';
 });
+
