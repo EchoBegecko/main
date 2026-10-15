@@ -4,81 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EchoBegecko's Website</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="topbar">
-        <div class="brand">EchoBegecko's Website</div>
-        <button id="chatButton" class="chat-button">Chat</button>
-    </header>
 
-    <main class="workspace" id="workspaceContainer">
-        <div class="workspace-label">WORKSPACE</div>
+    <!-- Full Blockbench Workspace Container -->
+    <div class="blockbench-container">
+        <header class="bb-header">
+            <div class="bb-title">EchoBegecko's Website</div>
+        </header>
 
-        <div class="tilt-wrapper" id="tiltCard">
-            <section class="profile-card">
-                <img
-                    class="avatar"
-                    src="https://minotar.net/helm/EchoBegecko/128.png"
-                    alt="EchoBegecko's Minecraft avatar"
-                >
-                <h1>EchoBegecko</h1>
-                <p class="subtitle">Welcome to my website!</p>
-                <div class="status">
-                    <span class="status-dot"></span>
-                    Website online
+        <main class="bb-workspace" id="workspaceContainer">
+            <!-- 3D Tilt Wrapper: Set 7cm down from the top, stretched with 1cm side margins -->
+            <div class="tilt-wrapper" id="tiltCard">
+                <!-- Inside layer isolates the idle up/down bop safely away from tilt math -->
+                <div class="bop-layer">
+                    <div class="profile-card">
+                        <!-- Corrected and highly reliable MC-Heads render engine link -->
+                        <img class="avatar" src="https://minotar.net/avatar/ab76bdccd4c34aafb26d87c2da694e62/64" alt="Minecraft Head">
+                        <div class="card-info">
+                            <span class="username">EchoBegecko</span>
+                            <span class="status-tag">Online</span>
+                        </div>
+                    </div>
                 </div>
-            </section>
-        </div>
-    </main>
-
-    <div id="chatOverlay" class="overlay hidden">
-        <section class="chat-window" role="dialog" aria-modal="true">
-            <div class="chat-header">
-                <div>
-                    <h2>Community Chat</h2>
-                    <p>Messages disappear after 30 minutes.</p>
-                </div>
-                <button id="closeChat" class="icon-button" aria-label="Close chat">×</button>
             </div>
-
-            <section id="loginPanel">
-                <h3>Sign in to chat</h3>
-                <form id="loginForm">
-                    <label for="username">Username</label>
-                    <input id="username" name="username" autocomplete="username"
-                           maxlength="40" required>
-
-                    <label for="password">Password</label>
-                    <input id="password" name="password" type="password"
-                           autocomplete="current-password" required>
-
-                    <p id="loginError" class="error" aria-live="polite"></p>
-                    <button class="primary-button" type="submit">Log in</button>
-                </form>
-                <p class="small-note">Only approved accounts can join.</p>
-            </section>
-
-            <section id="chatPanel" class="hidden">
-                <div class="chat-userbar">
-                    <span>Signed in as <strong id="currentUser"></strong></span>
-                    <button id="logoutButton" class="text-button">Log out</button>
-                </div>
-
-                <div id="messages" class="messages" aria-live="polite"></div>
-
-                <form id="messageForm" class="message-form">
-                    <input id="messageInput" maxlength="500"
-                           placeholder="Write a message..." autocomplete="off"
-                           required>
-                    <button class="primary-button" type="submit">Send</button>
-                </form>
-                <p id="chatError" class="error" aria-live="polite"></p>
-            </section>
-        </section>
+        </main>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/script.js"></script>
+    <!-- Links the tracking logic script -->
+    <script src="script.js"></script>
 </body>
 </html>
