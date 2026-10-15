@@ -1,35 +1,45 @@
+
 const card = document.getElementById('tiltCard');
 const workspace = document.getElementById('workspaceContainer');
 
-// Track mouse movement across the workspace canvas to follow the cursor smoothly
+let targetTiltX = 0;
+let targetTiltY = 0;
+let currentTiltX = 0;
+let currentTiltY = 0;
+
+// Adjust these to customise the effect
+const maxTilt = 12;      // Maximum tilt in degrees
+const followSpeed = 0.04; // Lower = slower, smoother movement
+
 workspace.addEventListener('mousemove', (e) => {
     const cardRect = card.getBoundingClientRect();
-    
-    // Locates exact center point coordinates of the card container
+
     const cardCenterX = cardRect.left + cardRect.width / 2;
     const cardCenterY = cardRect.top + cardRect.height / 2;
-    
-    // Calculates cursor distance offsets relative to the card's midpoint
+
     const mouseX = e.clientX - cardCenterX;
     const mouseY = e.clientY - cardCenterY;
-    
-    // Map offsets into amplified tilt parameters (Capped at 75 degrees max tilt)
-    const maxTilt = 75;
-    const tiltX = (mouseY / (window.innerHeight / 2)) * -maxTilt;
-    const tiltY = (mouseX / (window.innerWidth / 2)) * maxTilt;
-    
-    // Apply smooth rotation update directly following mouse position coordinates
-    card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+
+    // Calculate a much smaller tilt
+    targetTiltX = (mouseY / (window.innerHeight / 2)) * -maxTilt;
+    targetTiltY = (mouseX / (window.innerWidth / 2)) * maxTilt;
 });
 
-// Snaps layout flat back to zero coordinates smoothly when cursor exits boundary frame
+// Smoothly ease the card towards the mouse
+function animateTilt() {
+    currentTiltX += (targetTiltX - currentTiltX) * followSpeed;
+    currentTiltY += (targetTiltY - currentTiltY) * followSpeed;
+
+    card.style.transform =
+        `rotateX(${currentTiltX}deg) rotateY(${currentTiltY}deg)`;
+
+    requestAnimationFrame(animateTilt);
+}
+
+animateTilt();
+
+// Return the card to its neutral position
 workspace.addEventListener('mouseleave', () => {
-    card.style.transition = 'transform 0.6s ease-in-out';
-    card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    targetTiltX = 0;
+    targetTiltY = 0;
 });
-
-// Re-enables instantaneous fluid cursor adjustments when mouse enters workspace canvas
-workspace.addEventListener('mouseenter', () => {
-    card.style.transition = 'transform 0.1s ease-out';
-});
-
