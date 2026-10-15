@@ -26,53 +26,54 @@ body {
     border-bottom: 2px solid #212730;
     display: flex;
     align-items: center;
+    justify-content: center; /* Centers the title inside the header */
     padding: 0 20px;
 }
 
-.bb-logo {
-    color: #ffffff;
+/* Centered Header Text */
+.bb-title {
+    color: #38b6ff; /* Blockbench Cyan */
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 0.5px;
 }
 
-.bb-logo span {
-    color: #38b6ff; /* Blockbench Cyan */
-}
-
-/* Central Canvas Workspace with 3D Depth Perspective */
+/* Central Workspace */
 .bb-workspace {
     flex: 1;
+    position: relative;
+    background-image: radial-gradient(#212730 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    perspective: 2000px; /* Crucial step for the heavy 3D depth field */
+    transform-style: preserve-3d;
+}
+
+/* The stretched tilt wrapper container */
+.tilt-wrapper {
+    position: absolute;
+    top: 5cm; /* Positions container exactly 5 cm down from top header */
+    left: 1cm; /* 1 cm margin on the left side */
+    right: 1cm; /* 1 cm margin on the right side */
+    bottom: 1cm; /* Leaves spacing at the bottom framework */
+    background-color: #1c202a;
+    border: 2px solid #282f3d;
+    border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: radial-gradient(#212730 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
-    perspective: 1000px; /* Crucial step for the 3D depth field effect */
-}
-
-/* Structural Interaction Wrapper */
-.tilt-wrapper {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
     transform-style: preserve-3d;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.1s ease-out, border-color 0.3s, box-shadow 0.3s;
+    will-change: transform;
 }
 
-/* The Card Layout: Sized precisely to 7cm x 5cm */
+/* Profile Card Interior Framework */
 .profile-card {
-    width: 7cm;
-    height: 5cm;
-    background-color: #1c202a;
-    border: 2px solid #282f3d;
-    border-radius: 8px;
     display: flex;
     align-items: center;
-    padding: 0 25px;
-    box-sizing: border-box;
     gap: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    transform: translateZ(0);
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transform: translateZ(50px); /* Gives interior elements a layered floating 3D depth */
 }
 
 /* Sharp-Rendered Minecraft Head Skin */
@@ -82,7 +83,7 @@ body {
     border-radius: 4px;
     background-color: #212730;
     padding: 4px;
-    image-rendering: pixelated; /* Crucial step: keeps your skin crisp and pixel-perfect */
+    image-rendering: pixelated; /* Keeps your skin blocky and sharp */
 }
 
 /* Text Meta Layout */
@@ -94,7 +95,7 @@ body {
 
 .username {
     color: #ffffff;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 600;
 }
 
@@ -107,9 +108,9 @@ body {
 }
 
 /* Hover States: Glows Blockbench Cyan and loops the up-down bop sequence */
-.tilt-wrapper:hover .profile-card {
+.tilt-wrapper:hover {
     border-color: #38b6ff;
-    box-shadow: 0 0 25px rgba(56, 182, 255, 0.4), 0 20px 50px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 30px rgba(56, 182, 255, 0.35), 0 20px 60px rgba(0, 0, 0, 0.6);
     animation: bbBop 0.8s infinite ease-in-out;
 }
 
