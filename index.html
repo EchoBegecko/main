@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Profile Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Full Blockbench Workspace Container -->
+    <div class="blockbench-container">
+        <header class="bb-header">
+            <div class="bb-logo"><span>Block</span>bench Showcase</div>
+        </header>
+
+        <main class="bb-workspace">
+            <!-- 3D Tilt Interaction Wrapper -->
+            <div class="tilt-wrapper" id="tiltCard">
+                <!-- Profile Card constrained to exactly 7x5 cm -->
+                <div class="profile-card">
+                    <!-- Automatically pulls your 3D Minecraft head using your username -->
+                    <img class="avatar" src="https://crafatar.com" alt="Minecraft Head">
+                    <div class="card-info">
+                        <span class="username">echobegecko</span>
+                        <span class="status-tag">Online</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Links the mouse-tracking logic file -->
+    <script src="script.js"></script>
+</body>
+</html>
