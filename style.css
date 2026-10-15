@@ -26,7 +26,7 @@ body {
     border-bottom: 2px solid #212730;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers the title inside the header */
+    justify-content: center;
     padding: 0 20px;
 }
 
@@ -44,36 +44,53 @@ body {
     position: relative;
     background-image: radial-gradient(#212730 1.5px, transparent 1.5px);
     background-size: 24px 24px;
-    perspective: 2000px; /* Crucial step for the heavy 3D depth field */
+    perspective: 1500px; /* Gives the heavy 3D tilt depth */
     transform-style: preserve-3d;
 }
 
-/* The stretched tilt wrapper container */
+/* Stretched tilt container layout */
 .tilt-wrapper {
     position: absolute;
-    top: 5cm; /* Positions container exactly 5 cm down from top header */
-    left: 1cm; /* 1 cm margin on the left side */
-    right: 1cm; /* 1 cm margin on the right side */
-    bottom: 1cm; /* Leaves spacing at the bottom framework */
+    top: 7cm; /* Shifted down to exactly 7cm */
+    left: 1cm; /* 1 cm left margin */
+    right: 1cm; /* 1 cm right margin */
+    bottom: 1cm; /* Keeps the spacing consistent at the bottom */
     background-color: #1c202a;
     border: 2px solid #282f3d;
     border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     cursor: pointer;
     transform-style: preserve-3d;
-    transition: transform 0.1s ease-out, border-color 0.3s, box-shadow 0.3s;
+    transition: transform 0.15s ease-out, border-color 0.3s, box-shadow 0.3s;
     will-change: transform;
 }
 
-/* Profile Card Interior Framework */
+/* Bop Layer: Completely separate from tracking container to eliminate glitches */
+.bop-layer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+/* Triggers continuous bouncing animation on tracking panel hover */
+.tilt-wrapper:hover {
+    border-color: #38b6ff;
+    box-shadow: 0 0 30px rgba(56, 182, 255, 0.35), 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.tilt-wrapper:hover .bop-layer {
+    animation: bbBop 1.2s infinite ease-in-out;
+}
+
+/* Profile Card Content Wrapper */
 .profile-card {
     display: flex;
     align-items: center;
     gap: 20px;
-    transform: translateZ(50px); /* Gives interior elements a layered floating 3D depth */
+    transform: translateZ(40px); /* Pushes items forward in 3D layers */
 }
 
 /* Sharp-Rendered Minecraft Head Skin */
@@ -83,7 +100,7 @@ body {
     border-radius: 4px;
     background-color: #212730;
     padding: 4px;
-    image-rendering: pixelated; /* Keeps your skin blocky and sharp */
+    image-rendering: pixelated; /* Keeps skin sharp and pixel-perfect */
 }
 
 /* Text Meta Layout */
@@ -107,15 +124,8 @@ body {
     letter-spacing: 1px;
 }
 
-/* Hover States: Glows Blockbench Cyan and loops the up-down bop sequence */
-.tilt-wrapper:hover {
-    border-color: #38b6ff;
-    box-shadow: 0 0 30px rgba(56, 182, 255, 0.35), 0 20px 60px rgba(0, 0, 0, 0.6);
-    animation: bbBop 0.8s infinite ease-in-out;
-}
-
-/* Smooth up and down bopping sequence */
+/* Isolated up and down bopping loop */
 @keyframes bbBop {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { transform: translateY(0) translateZ(40px); }
+    50% { transform: translateY(-12px) translateZ(40px); }
 }
